@@ -44,3 +44,4 @@ echo "   Frontend is now connected to backend API at: http://localhost:4000/api"
 echo ""
 echo "Happy coding! 🚀"
 
+

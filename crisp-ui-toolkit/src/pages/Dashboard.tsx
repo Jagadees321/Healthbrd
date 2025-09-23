@@ -32,7 +32,7 @@ const Dashboard = () => {
         ]);
         
         console.log('Dashboard data received:', { metricsData, roiData });
-        setMetrics(metricsData.metrics);
+        setMetrics(metricsData || {});
         setRoiSignals((roiData as any).roiSignals || roiData);
       } catch (error) {
         console.error('Failed to fetch dashboard data:', error);
