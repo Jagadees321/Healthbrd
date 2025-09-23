@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Health Management App Design System - Minimalistic white/blue/grey theme */
+
+@layer base {
+  :root {
+    /* Pure white background with clean aesthetic */
+    --background: 0 0% 100%;
+    --foreground: 210 11% 15%;
+
+    /* Clean card backgrounds */
+    --card: 0 0% 100%;
+    --card-foreground: 210 11% 15%;
+
+    /* Minimal popovers */
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 11% 15%;
+
+    /* Blue action buttons - primary healthcare blue */
+    --primary: 217 91% 59%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 217 91% 54%;
+
+    /* Subtle secondary actions */
+    --secondary: 210 17% 95%;
+    --secondary-foreground: 210 11% 15%;
+    --secondary-hover: 210 17% 90%;
+
+    /* Neutral grey muted elements */
+    --muted: 210 17% 96%;
+    --muted-foreground: 210 8% 46%;
+
+    /* Subtle accent for highlights */
+    --accent: 210 17% 95%;
+    --accent-foreground: 210 11% 15%;
+
+    /* Health-appropriate destructive colors */
+    --destructive: 0 75% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Clean minimal borders */
+    --border: 210 20% 90%;
+    --input: 210 20% 96%;
+    --ring: 217 91% 59%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Keep light theme for minimalistic approach */
+    --background: 0 0% 100%;
+    --foreground: 210 11% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 210 11% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 11% 15%;
+
+    --primary: 217 91% 59%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 17% 95%;
+    --secondary-foreground: 210 11% 15%;
+
+    --muted: 210 17% 96%;
+    --muted-foreground: 210 8% 46%;
+
+    --accent: 210 17% 95%;
+    --accent-foreground: 210 11% 15%;
+
+    --destructive: 0 75% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 20% 90%;
+    --input: 210 20% 96%;
+    --ring: 217 91% 59%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
