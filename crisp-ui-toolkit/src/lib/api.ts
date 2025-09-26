@@ -226,13 +226,13 @@ export const hcpApi = {
     return response.data!;
   },
 
-  async getTopEngaged(): Promise<any[]> {
-    const response = await apiRequest<any[]>('/hcp/engagement/top');
+  async getTopEngaged(): Promise<any> {
+    const response = await apiRequest<any>('/hcp/engagement/top');
     return response.data!;
   },
 
-  async getLeastEngaged(): Promise<any[]> {
-    const response = await apiRequest<any[]>('/hcp/engagement/least');
+  async getLeastEngaged(): Promise<any> {
+    const response = await apiRequest<any>('/hcp/engagement/least');
     return response.data!;
   },
 };

@@ -145,12 +145,28 @@ router.get('/analytics/summary', auth, async (req, res) => {
       { $group: { _id: null, avgEngagement: { $avg: '$engagementScore' } } }
     ]);
     
+    // Calculate weekly and monthly active users
+    const oneWeekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+    const oneMonthAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+    
+    const weeklyActiveUsers = await HCP.countDocuments({
+      lastActive: { $gte: oneWeekAgo }
+    });
+    
+    const monthlyActiveUsers = await HCP.countDocuments({
+      lastActive: { $gte: oneMonthAgo }
+    });
+    
     res.status(200).json({
       status: 'success',
       data: {
-        totalHCPs,
+        summary: {
+          totalHCPs,
+          avgEngagementScore: avgEngagement[0]?.avgEngagement || 0
+        },
+        weeklyActiveUsers,
+        monthlyActiveUsers,
         activeHCPs,
-        avgEngagement: avgEngagement[0]?.avgEngagement || 0,
         engagementTrend: '+12.5%',
         topSpecialties: ['Cardiology', 'Neurology', 'Oncology'],
         regionalDistribution: {
@@ -181,14 +197,18 @@ router.get('/engagement/top', auth, async (req, res) => {
     
     res.status(200).json({
       status: 'success',
-      data: topHCPs.map(hcp => ({
-        id: hcp._id,
-        name: hcp.name || 'Unknown HCP',
-        specialty: hcp.specialty || 'General',
-        engagementScore: hcp.engagementScore || 0,
-        lastActivity: hcp.lastActive || new Date(),
-        city: hcp.city || 'Unknown'
-      }))
+      data: {
+        topEngagedHCPs: topHCPs.map(hcp => ({
+          _id: hcp._id,
+          name: hcp.name || 'Unknown HCP',
+          specialty: hcp.specialty || 'General',
+          engagementScore: hcp.engagementScore || 0,
+          lastActive: hcp.lastActive || new Date(),
+          city: hcp.city || 'Unknown',
+          shares: hcp.shares || 0,
+          isActive: hcp.isActive !== false
+        }))
+      }
     });
   } catch (error) {
     console.error('Get top engaged HCPs error:', error);
@@ -210,14 +230,18 @@ router.get('/engagement/least', auth, async (req, res) => {
     
     res.status(200).json({
       status: 'success',
-      data: leastHCPs.map(hcp => ({
-        id: hcp._id,
-        name: hcp.name || 'Unknown HCP',
-        specialty: hcp.specialty || 'General',
-        engagementScore: hcp.engagementScore || 0,
-        lastActivity: hcp.lastActive || new Date(),
-        city: hcp.city || 'Unknown'
-      }))
+      data: {
+        leastEngagedHCPs: leastHCPs.map(hcp => ({
+          _id: hcp._id,
+          name: hcp.name || 'Unknown HCP',
+          specialty: hcp.specialty || 'General',
+          engagementScore: hcp.engagementScore || 0,
+          lastActive: hcp.lastActive || new Date(),
+          city: hcp.city || 'Unknown',
+          shares: hcp.shares || 0,
+          isActive: hcp.isActive !== false
+        }))
+      }
     });
   } catch (error) {
     console.error('Get least engaged HCPs error:', error);
